@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, initial-scale=1.0">
+<title>ChatGPT × Claude 比較スライド｜あいこのAI教室</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e8ecf0;
+  }
+
+  section {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ====== SLIDE 1: タイトル ====== */
+  .slide-title {
+    background: linear-gradient(135deg, #1a2a4a 0%, #2D3748 60%, #1e3a5f 100%);
+    color: #fff;
+  }
+  .slide-title .badge {
+    background: #4A90D9;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 10px 28px;
+    border-radius: 40px;
+    letter-spacing: 0.08em;
+    margin-bottom: 40px;
+  }
+  .slide-title h1 {
+    font-size: 72px;
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    max-width: 1500px;
+  }
+  .slide-title h1 span {
+    color: #4A90D9;
+  }
+  .slide-title .sub {
+    margin-top: 36px;
+    font-size: 26px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.05em;
+  }
+  .slide-title .deco-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.07;
+    background: #4A90D9;
+  }
+  .slide-title .c1 { width: 600px; height: 600px; right: -120px; top: -150px; }
+  .slide-title .c2 { width: 360px; height: 360px; left: -80px; bottom: -100px; }
+
+  /* ====== SLIDE 2: 目次 ====== */
+  .slide-agenda {
+    background: #F8F9FA;
+  }
+  .slide-agenda .top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 10px;
+    background: linear-gradient(90deg, #4A90D9, #38B2AC);
+  }
+  .slide-agenda h2 {
+    font-size: 48px;
+    font-weight: 900;
+    color: #2D3748;
+    margin-bottom: 56px;
+    text-align: center;
+  }
+  .agenda-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 1100px;
+  }
+  .agenda-item {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 24px 40px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    border-left: 6px solid #4A90D9;
+  }
+  .agenda-item .num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #4A90D9;
+    min-width: 48px;
+  }
+  .agenda-item .text {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2D3748;
+  }
+
+  /* ====== SLIDE 3: 基本説明 ====== */
+  .slide-intro {
+    background: #fff;
+  }
+  .slide-intro .top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 10px;
+    background: linear-gradient(90deg, #4A90D9, #38B2AC);
+  }
+  .slide-intro h2 {
+    font-size: 52px;
+    font-weight: 900;
+    color: #2D3748;
+    margin-bottom: 60px;
+    text-align: center;
+  }
+  .intro-cards {
+    display: flex;
+    gap: 48px;
+    width: 1600px;
+  }
+  .intro-card {
+    flex: 1;
+    border-radius: 24px;
+    padding: 56px 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .intro-card.gpt { background: linear-gradient(160deg, #e8f4ff, #dbeeff); }
+  .intro-card.claude { background: linear-gradient(160deg, #e6f9f8, #d4f2f0); }
+  .intro-card .icon { font-size: 80px; margin-bottom: 24px; }
+  .intro-card .brand {
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .intro-card.gpt .brand { color: #2575c4; }
+  .intro-card.claude .brand { color: #38B2AC; }
+  .intro-card .maker {
+    font-size: 20px;
+    color: #888;
+    margin-bottom: 28px;
+  }
+  .intro-card .desc {
+    font-size: 24px;
+    color: #2D3748;
+    line-height: 1.7;
+  }
+
+  /* ====== SLIDE 4: 比較表 ====== */
+  .slide-compare {
+    background: #F8F9FA;
+  }
+  .slide-compare .top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 10px;
+    background: linear-gradient(90deg, #4A90D9, #38B2AC);
+  }
+  .slide-compare h2 {
+    font-size: 48px;
+    font-weight: 900;
+    color: #2D3748;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .compare-table {
+    width: 1500px;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 24px;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  .compare-table thead th {
+    padding: 28px 36px;
+    font-size: 26px;
+    font-weight: 700;
+  }
+  .compare-table thead th:first-child { background: #2D3748; color: #fff; text-align: left; }
+  .compare-table thead th:nth-child(2) { background: #2575c4; color: #fff; }
+  .compare-table thead th:nth-child(3) { background: #38B2AC; color: #fff; }
+  .compare-table tbody tr:nth-child(even) { background: #f5f8ff; }
+  .compare-table tbody td {
+    padding: 22px 36px;
+    border-bottom: 1px solid #e8ecf0;
+    color: #2D3748;
+    text-align: center;
+    font-weight: 500;
+  }
+  .compare-table tbody td:first-child { text-align: left; font-weight: 700; color: #4a5568; }
+  .compare-table .winner { font-weight: 700; color: #2D3748; }
+  .star { color: #f6ad55; }
+
+  /* ====== SLIDE 5: 使い分けガイド ====== */
+  .slide-guide {
+    background: #fff;
+  }
+  .slide-guide .top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 10px;
+    background: linear-gradient(90deg, #4A90D9, #38B2AC);
+  }
+  .slide-guide h2 {
+    font-size: 48px;
+    font-weight: 900;
+    color: #2D3748;
+    margin-bottom: 52px;
+    text-align: center;
+  }
+  .guide-cols {
+    display: flex;
+    gap: 48px;
+    width: 1600px;
+  }
+  .guide-col {
+    flex: 1;
+    border-radius: 24px;
+    padding: 48px 52px;
+  }
+  .guide-col.gpt { background: linear-gradient(160deg, #e8f4ff, #dbeeff); }
+  .guide-col.claude { background: linear-gradient(160deg, #e6f9f8, #d4f2f0); }
+  .guide-col .col-title {
+    font-size: 34px;
+    font-weight: 900;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .guide-col.gpt .col-title { color: #2575c4; }
+  .guide-col.claude .col-title { color: #38B2AC; }
+  .guide-col ul { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+  .guide-col li {
+    font-size: 26px;
+    color: #2D3748;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    line-height: 1.5;
+  }
+  .guide-col li::before {
+    content: "✓";
+    font-weight: 700;
+    font-size: 22px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .guide-col.gpt li::before { color: #2575c4; }
+  .guide-col.claude li::before { color: #38B2AC; }
+
+  /* ====== SLIDE 6: ステップ ====== */
+  .slide-steps {
+    background: linear-gradient(135deg, #1a2a4a 0%, #2D3748 100%);
+    color: #fff;
+  }
+  .slide-steps h2 {
+    font-size: 52px;
+    font-weight: 900;
+    margin-bottom: 60px;
+    text-align: center;
+  }
+  .steps-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    width: 1560px;
+  }
+  .step-box {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 44px 40px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .step-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #4A90D9;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .step-icon { font-size: 56px; margin-bottom: 20px; }
+  .step-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+  .step-desc {
+    font-size: 22px;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.6;
+  }
+  .step-arrow {
+    font-size: 40px;
+    color: #4A90D9;
+    margin-top: 100px;
+    flex-shrink: 0;
+  }
+
+  /* ====== SLIDE 7: テンプレ紹介 ====== */
+  .slide-template {
+    background: #F8F9FA;
+  }
+  .slide-template .top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 10px;
+    background: linear-gradient(90deg, #4A90D9, #38B2AC);
+  }
+  .slide-template h2 {
+    font-size: 44px;
+    font-weight: 900;
+    color: #2D3748;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .slide-template .sub {
+    font-size: 24px;
+    color: #718096;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .template-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    width: 1600px;
+  }
+  .template-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 4px solid #4A90D9;
+  }
+  .template-card .t-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: #4A90D9;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .template-card .t-icon { font-size: 36px; margin-bottom: 10px; }
+  .template-card .t-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2D3748;
+    line-height: 1.4;
+  }
+
+  /* ====== SLIDE 8: ワークフロー ====== */
+  .slide-workflow {
+    background: #fff;
+  }
+  .slide-workflow .top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 10px;
+    background: linear-gradient(90deg, #4A90D9, #38B2AC);
+  }
+  .slide-workflow h2 {
+    font-size: 48px;
+    font-weight: 900;
+    color: #2D3748;
+    margin-bottom: 52px;
+    text-align: center;
+  }
+  .workflow-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 1400px;
+  }
+  .workflow-item {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    background: #F8F9FA;
+    border-radius: 16px;
+    padding: 28px 40px;
+  }
+  .workflow-item .wf-label {
+    background: #4A90D9;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 8px 24px;
+    border-radius: 40px;
+    white-space: nowrap;
+  }
+  .workflow-item .wf-flow {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+  }
+  .wf-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 24px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #2D3748;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    text-align: center;
+  }
+  .wf-box.gpt { border-top: 4px solid #2575c4; color: #2575c4; }
+  .wf-box.claude { border-top: 4px solid #38B2AC; color: #38B2AC; }
+  .wf-arrow { font-size: 28px; color: #CBD5E0; }
+  .wf-goal {
+    font-size: 22px;
+    color: #718096;
+    max-width: 320px;
+    line-height: 1.5;
+  }
+
+  /* ====== SLIDE 9: まとめ ====== */
+  .slide-summary {
+    background: #F8F9FA;
+  }
+  .slide-summary .top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 10px;
+    background: linear-gradient(90deg, #4A90D9, #38B2AC);
+  }
+  .slide-summary h2 {
+    font-size: 52px;
+    font-weight: 900;
+    color: #2D3748;
+    margin-bottom: 52px;
+    text-align: center;
+  }
+  .summary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 1300px;
+  }
+  .summary-item {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 44px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    font-size: 28px;
+    font-weight: 500;
+    color: #2D3748;
+  }
+  .summary-item .check { font-size: 32px; }
+
+  /* ====== SLIDE 10: CTA ====== */
+  .slide-cta {
+    background: linear-gradient(135deg, #2575c4 0%, #38B2AC 100%);
+    color: #fff;
+    text-align: center;
+  }
+  .slide-cta .icon { font-size: 88px; margin-bottom: 32px; }
+  .slide-cta h2 {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 32px;
+  }
+  .slide-cta .msg {
+    font-size: 28px;
+    opacity: 0.88;
+    margin-bottom: 52px;
+    line-height: 1.6;
+  }
+  .slide-cta .cta-box {
+    background: rgba(255,255,255,0.18);
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 20px;
+    padding: 32px 80px;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .slide-cta .brand-tag {
+    position: absolute;
+    bottom: 48px;
+    right: 72px;
+    font-size: 20px;
+    opacity: 0.6;
+    letter-spacing: 0.06em;
+  }
+
+  @media print {
+    body { background: none; }
+    section {
+      margin: 0;
+      page-break-after: always;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: タイトル -->
+<section class="slide-title">
+  <div class="deco-circle c1"></div>
+  <div class="deco-circle c2"></div>
+  <div class="badge">あいこのAI教室｜初心者向けガイド</div>
+  <h1>ChatGPT × Claude<br><span>何が違うの？</span><br>全部使って比べてみた</h1>
+  <div class="sub">使い分けのコツ＋プロンプトテンプレート10選</div>
+</section>
+
+<!-- SLIDE 2: 目次 -->
+<section class="slide-agenda">
+  <div class="top-bar"></div>
+  <h2>📋 今日わかること</h2>
+  <div class="agenda-list">
+    <div class="agenda-item">
+      <span class="num">01</span>
+      <span class="text">ChatGPTとClaudeって、そもそも何者？</span>
+    </div>
+    <div class="agenda-item">
+      <span class="num">02</span>
+      <span class="text">6つの視点で徹底比較してみた</span>
+    </div>
+    <div class="agenda-item">
+      <span class="num">03</span>
+      <span class="text">場面別！どっちを使えばいい？</span>
+    </div>
+    <div class="agenda-item">
+      <span class="num">04</span>
+      <span class="text">今日から使えるプロンプトテンプレート10選</span>
+    </div>
+    <div class="agenda-item">
+      <span class="num">05</span>
+      <span class="text">ChatGPT＋Claudeを組み合わせる最強ワークフロー</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: 基本説明 -->
+<section class="slide-intro">
+  <div class="top-bar"></div>
+  <h2>🤖 まず「何者」かを知ろう</h2>
+  <div class="intro-cards">
+    <div class="intro-card gpt">
+      <div class="icon">💬</div>
+      <div class="brand">ChatGPT</div>
+      <div class="maker">OpenAI（アメリカ）</div>
+      <div class="desc">2022年公開のAIの"元祖"<br>ユーザー数が圧倒的に多く<br>使い方の情報も豊富<br>最新情報の検索にも対応</div>
+    </div>
+    <div class="intro-card claude">
+      <div class="icon">✨</div>
+      <div class="brand">Claude</div>
+      <div class="maker">Anthropic（アメリカ）</div>
+      <div class="desc">「安全なAI」を理念に開発<br>文章の質が高いと評判<br>長文の読み込みが得意<br>日本語の自然さが◎</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: 比較表 -->
+<section class="slide-compare">
+  <div class="top-bar"></div>
+  <h2>⚖️ 6つの視点で比べてみた</h2>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>比較ポイント</th>
+        <th>💬 ChatGPT</th>
+        <th>✨ Claude</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>文章の"温かみ"</td>
+        <td>ビジネスライク・整然</td>
+        <td class="winner">⭐ 自然で温かい日本語</td>
+      </tr>
+      <tr>
+        <td>長文の処理</td>
+        <td>やや苦手な場合も</td>
+        <td class="winner">⭐ 長文読み込みが得意</td>
+      </tr>
+      <tr>
+        <td>画像の読み取り（無料）</td>
+        <td>有料版のみ</td>
+        <td class="winner">⭐ 無料版でも対応</td>
+      </tr>
+      <tr>
+        <td>最新情報の検索</td>
+        <td class="winner">⭐ Web検索に対応</td>
+        <td>学習データ内のみ</td>
+      </tr>
+      <tr>
+        <td>コード・計算</td>
+        <td class="winner">⭐ 実績・安定感あり</td>
+        <td>対応はするが差あり</td>
+      </tr>
+      <tr>
+        <td>使い方の情報量</td>
+        <td class="winner">⭐ SNSや記事が豊富</td>
+        <td>増加中</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SLIDE 5: 使い分けガイド -->
+<section class="slide-guide">
+  <div class="top-bar"></div>
+  <h2>🗺️ 場面別！どっちを使えばいい？</h2>
+  <div class="guide-cols">
+    <div class="guide-col gpt">
+      <div class="col-title">💬 ChatGPTはこんなとき</div>
+      <ul>
+        <li>最新ニュース・情報を調べながら答えてほしい</li>
+        <li>箇条書き・一覧をスピーディに作りたい</li>
+        <li>コードや計算式を書いてほしい</li>
+        <li>困ったとき、調べる情報が多いので安心</li>
+      </ul>
+    </div>
+    <div class="guide-col claude">
+      <div class="col-title">✨ Claudeはこんなとき</div>
+      <ul>
+        <li>文章を書く・整える・丁寧に直してほしい</li>
+        <li>長い書類や資料を読んで要約してほしい</li>
+        <li>画像を見て説明・分析してほしい（無料で）</li>
+        <li>温かみのある自然な日本語文章がほしい</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6: 始め方ステップ -->
+<section class="slide-steps">
+  <h2>🚀 今日からの3ステップ</h2>
+  <div class="steps-row">
+    <div class="step-box">
+      <div class="step-num">STEP 01</div>
+      <div class="step-icon">📱</div>
+      <div class="step-title">今すぐ<br>アカウント登録</div>
+      <div class="step-desc">ChatGPT・Claude<br>両方ともGoogleアカウントで<br>30秒で完了。無料でOK</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-box">
+      <div class="step-num">STEP 02</div>
+      <div class="step-icon">✍️</div>
+      <div class="step-title">同じ文章を<br>両方に入れて比較</div>
+      <div class="step-desc">「メールの返信を書いて」を<br>両方に投げてみる。<br>違いが体感でわかる！</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-box">
+      <div class="step-num">STEP 03</div>
+      <div class="step-icon">🎯</div>
+      <div class="step-title">使い分けルールを<br>自分で決める</div>
+      <div class="step-desc">「文章系はClaude」<br>「調べ系はChatGPT」など<br>自分ルールを作ってOK</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7: テンプレ一覧 -->
+<section class="slide-template">
+  <div class="top-bar"></div>
+  <h2>📝 コピペで使える！プロンプトテンプレート10選</h2>
+  <div class="sub">詳細・全文は有料NOTEで公開中</div>
+  <div class="template-grid">
+    <div class="template-card">
+      <div class="t-num">No.01</div>
+      <div class="t-icon">🏫</div>
+      <div class="t-name">授業の説明を<br>子向けに直す</div>
+    </div>
+    <div class="template-card">
+      <div class="t-num">No.02</div>
+      <div class="t-icon">📨</div>
+      <div class="t-name">保護者向け<br>お便りの下書き</div>
+    </div>
+    <div class="template-card">
+      <div class="t-num">No.03</div>
+      <div class="t-icon">📊</div>
+      <div class="t-name">会議・研修<br>レジュメ作成</div>
+    </div>
+    <div class="template-card">
+      <div class="t-num">No.04</div>
+      <div class="t-icon">📄</div>
+      <div class="t-name">長文を<br>3行で要約</div>
+    </div>
+    <div class="template-card">
+      <div class="t-num">No.05</div>
+      <div class="t-icon">🤝</div>
+      <div class="t-name">クレーム対応<br>返信メール</div>
+    </div>
+    <div class="template-card">
+      <div class="t-num">No.06</div>
+      <div class="t-icon">📸</div>
+      <div class="t-name">SNS投稿文<br>5パターン作成</div>
+    </div>
+    <div class="template-card">
+      <div class="t-num">No.07</div>
+      <div class="t-icon">💡</div>
+      <div class="t-name">経験を記事<br>ネタに変換</div>
+    </div>
+    <div class="template-card">
+      <div class="t-num">No.08</div>
+      <div class="t-icon">📈</div>
+      <div class="t-name">アンケート結果<br>の考察</div>
+    </div>
+    <div class="template-card">
+      <div class="t-num">No.09</div>
+      <div class="t-icon">🌐</div>
+      <div class="t-name">英語を<br>自然な日本語に</div>
+    </div>
+    <div class="template-card">
+      <div class="t-num">No.10</div>
+      <div class="t-icon">🗓️</div>
+      <div class="t-name">業務スケジュール<br>最適化</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8: ワークフロー -->
+<section class="slide-workflow">
+  <div class="top-bar"></div>
+  <h2>⚡ 2つを組み合わせる最強ワークフロー</h2>
+  <div class="workflow-list">
+    <div class="workflow-item">
+      <span class="wf-label">ワークフロー A</span>
+      <div class="wf-flow">
+        <div class="wf-box gpt">ChatGPT<br><small style="font-weight:400;font-size:18px">情報を調べる・集める</small></div>
+        <span class="wf-arrow">→</span>
+        <div class="wf-box claude">Claude<br><small style="font-weight:400;font-size:18px">文章に仕上げる</small></div>
+      </div>
+      <div class="wf-goal">情報収集 → 文章化<br>最新情報を温かく伝える文に</div>
+    </div>
+    <div class="workflow-item">
+      <span class="wf-label">ワークフロー B</span>
+      <div class="wf-flow">
+        <div class="wf-box gpt">ChatGPT<br><small style="font-weight:400;font-size:18px">素早く箇条書きで下書き</small></div>
+        <span class="wf-arrow">→</span>
+        <div class="wf-box claude">Claude<br><small style="font-weight:400;font-size:18px">読みやすい文章に磨く</small></div>
+      </div>
+      <div class="wf-goal">速さ × 質を両立させる<br>資料・スライド制作に最適</div>
+    </div>
+    <div class="workflow-item">
+      <span class="wf-label">ワークフロー C</span>
+      <div class="wf-flow">
+        <div class="wf-box claude">Claude<br><small style="font-weight:400;font-size:18px">アイデアを壁打ちする</small></div>
+        <span class="wf-arrow">→</span>
+        <div class="wf-box gpt">ChatGPT<br><small style="font-weight:400;font-size:18px">企画書・資料に整理</small></div>
+      </div>
+      <div class="wf-goal">考える → まとめる<br>企画立案・新しい取り組みに</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 9: まとめ -->
+<section class="slide-summary">
+  <div class="top-bar"></div>
+  <h2>✅ まとめ：今日から持ち帰ってほしいこと</h2>
+  <div class="summary-list">
+    <div class="summary-item">
+      <span class="check">✅</span>
+      ChatGPTは「最新情報・幅広さ」が強み。困ったときの情報が多くて安心
+    </div>
+    <div class="summary-item">
+      <span class="check">✅</span>
+      Claudeは「文章の質・長文・画像対応」が強み。日本語の自然さが高い
+    </div>
+    <div class="summary-item">
+      <span class="check">✅</span>
+      どちらも無料で使えるから、両方アカウントを作って使い分けるのがベスト
+    </div>
+    <div class="summary-item">
+      <span class="check">✅</span>
+      「文章を書く・整える」がメインなら、まず Claudeを試してみて
+    </div>
+    <div class="summary-item">
+      <span class="check">✅</span>
+      まず今日、テンプレートを1つだけ試してみることから始めよう！
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 10: CTA -->
+<section class="slide-cta">
+  <div class="icon">📝</div>
+  <h2>テンプレート全文は<br>NOTEで無料公開中！</h2>
+  <div class="msg">コピペして使うだけ。難しいことは何もないよ。<br>一緒にやっていこうね 🙌</div>
+  <div class="cta-box">📌 NOTE「あいこのAI教室」をチェック！</div>
+  <div class="brand-tag">あいこのAI教室</div>
+</section>
+
+</body>
+</html>
